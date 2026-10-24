@@ -106,7 +106,7 @@ def build_command(message, session_id=None, system=None):
     # current request into one explicit turn so the model answers as JARVIS
     # instead of narrating its CLI/runtime. Quiet mode removes the Hermes banner.
     prompt = message
-    if system:
+    if system and not valid_session(session_id):
         prompt = (f"{system}\n\n## Current user request\n{message}\n\n"
                   "Answer the request now. Return only the words JARVIS should say aloud; "
                   "never include session IDs, runtime metadata, headings, or process narration.")
